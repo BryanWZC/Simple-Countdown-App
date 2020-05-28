@@ -1,6 +1,6 @@
 # Simple Coundown Timer 
 
-### Website: http://www.simple-countdown-app.now.sh
+### Website: http://simple-countdown-app.now.sh
 
 A simple countdown timer responsive on different devices (even on mobile phones). To run, type command "run next dev" onto terminal.
 
