@@ -1,0 +1,33 @@
+{
+  "devFiles": [],
+  "lowPriorityFiles": [
+    "static/qvFKUnXu5pllfKxAloh5j/_buildManifest.js",
+    "static/qvFKUnXu5pllfKxAloh5j/_ssgManifest.js"
+  ],
+  "pages": {
+    "/": [
+      "static/runtime/webpack-c212667a5f965e81e004.js",
+      "static/chunks/framework.fc252ecc58f4dea9b01d.js",
+      "static/runtime/main-79ebcf0a4e33edc9fa4f.js"
+    ],
+    "/_app": [
+      "static/runtime/webpack-c212667a5f965e81e004.js",
+      "static/chunks/framework.fc252ecc58f4dea9b01d.js",
+      "static/chunks/b56d5e744cf9d5b4ae6fd1045e787dfa7127e830.7170ddf2cfda06484936.js",
+      "static/runtime/main-79ebcf0a4e33edc9fa4f.js"
+    ],
+    "/_error": [
+      "static/runtime/webpack-c212667a5f965e81e004.js",
+      "static/chunks/framework.fc252ecc58f4dea9b01d.js",
+      "static/runtime/main-79ebcf0a4e33edc9fa4f.js"
+    ],
+    "/_polyfills": [
+      "static/runtime/polyfills-283772482f0035efccb9.js"
+    ],
+    "/index": [
+      "static/runtime/webpack-c212667a5f965e81e004.js",
+      "static/chunks/framework.fc252ecc58f4dea9b01d.js",
+      "static/runtime/main-79ebcf0a4e33edc9fa4f.js"
+    ]
+  }
+}
