@@ -239,6 +239,7 @@ export default class home extends React.Component{
           }
           #title{
             font-size: 55px;
+            cursor: auto;
           }
           .flex-container-column{
             display: flex;
@@ -299,6 +300,16 @@ export default class home extends React.Component{
           h1:hover{
             cursor: pointer;
           }
+          h1:focus{
+            outline: none;
+            user-select: none;
+          }
+          h1, h2, p{
+            -webkit-user-select: none;  /* Chrome 49+ */
+            -moz-user-select: none;     /* Firefox 43+ */
+            -ms-user-select: none;      /* No support yet */
+            user-select: none;          /* Likely future */   
+          }
           footer{
             position: absolute;
             display: block;
@@ -326,6 +337,9 @@ export default class home extends React.Component{
           }
           button{
             outline: none;
+          }
+          button:focus{
+            outline:none;
           }
           @media screen and (max-width: 1000px){
             #title{
