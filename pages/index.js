@@ -401,13 +401,11 @@ export default class home extends React.Component{
             }
             footer{
               font-size: 13px;
-              bottom: 0;
             }
           }
           @media screen and (max-width: 575px){
             footer{
               font-size: 13px;
-              bottom: -30px;
             }
             .navbar{
               flex-direction: column;
@@ -445,9 +443,6 @@ export default class home extends React.Component{
             #title{
               font-size: 24px;
             }
-            #display{
-              min-height: 100vh;
-            }
             .time-display{
               font-size: 60px;
             }
@@ -456,9 +451,6 @@ export default class home extends React.Component{
             }
             #start-button{
               font-size: 20px;
-            }
-            footer{
-              bottom: -102px;
             }
             #timer-wrapper{
               bottom: 25%;
@@ -477,7 +469,7 @@ export default class home extends React.Component{
         padding: 0;
         margin: 0;
         border: 0;
-        
+        box-sizing: border-box;
       }
     `}</style>
       </div>
