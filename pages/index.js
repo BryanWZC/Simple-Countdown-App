@@ -10,9 +10,6 @@ export default class home extends React.Component{
       timerStart: false,
       enableTimer: true,
       alarmStart: false,
-      audio: () => {
-        return new Audio('./alarm.mp3')
-      },
       audio1: '',
       getHourArr: () => {
         let arr = [];
@@ -30,8 +27,6 @@ export default class home extends React.Component{
       },
     };
 
-
-    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleStartClick = this.handleStartClick.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -39,16 +34,19 @@ export default class home extends React.Component{
     this.windowClick = this.windowClick.bind(this);
     };
 
+  /*Re-renders current time and countdown values */
   componentDidMount() {
     this.localTime = setInterval(() => {this.setState({ time: new Date().toLocaleTimeString()})}, 1000);
     this.timerTime = setInterval(this.countDown, 1000);
   }
 
+  /*Clear the intervals to prevent memory leaks*/
   componentWillUnmount(){
     clearInterval(this.localTime)
     clearInterval(this.timerTime)
   }
 
+  /*Sets current time to be refreshed in componentdidMount*/
   todayDate(){
     let today = new Date();
     let dd = String(today.getDate()).padStart(2,'0');
@@ -57,16 +55,13 @@ export default class home extends React.Component{
     return  mm + '/' + dd + '/' + yyyy;
   };
 
-  handleChange(e){
-    let target = e.target;
-    this.setState({[target.name] : target.value});
-  };
-
+  /*Corresponds dial value to hours, mins and secs state values*/
   handleClick(e){
     let target = e.target;
     this.setState({[target.name] : target.value.toString().padStart(2,0)})
   }
 
+  /*Start and stop button for timer*/
   handleStartClick(){
     let button = document.getElementById('start-button');
     let hours = this.state.hours;
@@ -91,7 +86,7 @@ export default class home extends React.Component{
     }
   }
 
-
+  /*Changes the state values for hours, mins and secs*/
   countDown (){
     let hours = this.state.hours;
     let mins = this.state.mins;
@@ -113,7 +108,7 @@ export default class home extends React.Component{
         this.setState({secs: '59'})
       }
       else if(this.state.alarmStart == true){
-        this.setState({audio1 : this.state.audio()});
+        this.setState({audio1 : new Audio('./alarm.mp3')});
         this.setState({timerStart : false});
         this.state.audio1.play();
         window.navigator.vibrate(2000);
@@ -127,6 +122,7 @@ export default class home extends React.Component{
     }
   }
 
+  /*Expands the display box upwards to show the dial options*/
   handleSetTimeClick(){
       let hour = document.getElementById('dial-hour');
       let mins = document.getElementById('dial-min');
@@ -150,6 +146,7 @@ export default class home extends React.Component{
     }
   }
 
+  /*Silence alarm and vibration from timer reaching zero*/
   windowClick(){
     if (this.state.audio1 != '' && this.state.alarmStart == true){
       this.setState({alarmStart : false});
@@ -158,6 +155,7 @@ export default class home extends React.Component{
     }
   }
 
+  /*2 functions below add aestetics when choosing dial*/
   hoverColor(e){
     e.target.style.background = '#373337';
     e.target.style.color = 'white';
@@ -182,6 +180,9 @@ export default class home extends React.Component{
 
     return(
       <div className = 'container' onClick = {this.windowClick}>
+        
+      {/***Nav Bar***/}
+
         <div className = 'navbar'>
           <h1 id = 'title'>Simple Countdown Timer</h1>
           <div className = 'flex-container-column'>
@@ -189,6 +190,8 @@ export default class home extends React.Component{
               <h2 className = 'heading'>Current Time: <u>{this.state.time}</u></h2>  
           </div>
         </div>
+        
+      {/***Content***/}
 
         <div id = 'display'>
           <div id = 'timer-wrapper'>
@@ -217,86 +220,110 @@ export default class home extends React.Component{
             </div>
             <button id = 'start-button' onClick = {this.handleStartClick}>Start</button>
           </div>
+
+        {/***Footer***/}
+
           <footer>
             <p>&copy; Bryan Wong | 2020</p>
           </footer>
         </div>
 
         <style jsx>{`
-          .container{
-            min-height: calc(100vh - 18px);
-            border: solid;
-            
-          }
-          .navbar{
-            display: flex;
-            min-height: 10vh;
-            padding-left: 10px;
-            align-items: center;
-            background: #373337;
-            color: #D8B39C;
-            border-bottom: 3px solid #D8B39C;
-          }
-          #title{
-            font-size: 55px;
-            cursor: auto;
-          }
-          .flex-container-column{
-            display: flex;
-            flex-direction: column;
-            padding: 0 10px 0 10px;
-            align-items: center;
-            jistify-content: center;
-            margin-left: 2%;
-            border: solid;
-          }
-          .heading{
-            font-weight: 300;
-          }
 
-          #timer-wrapper{
+        /*Id and Class Styling*/
+
+          .container{
             display: flex;
             flex-direction: column;
-            min-width: 28%;
-            position: absolute;
-            bottom: 33%;
+            flex: 0 0 auto;
+            box-sizing: border-box;
+            height: 100vh;
           }
-          #display{
-            display: flex;
-            min-height: calc(90vh - 20px);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 100%;
-            background-image: radial-gradient( #F7F9F9 , #E3E7D3, #849483);
-          }
-          #timer{
-            display: flex;
-            flex-direction: row;
-            text-align: center;
-            min-width: 33.33%;
-          }
-          .time-place-holders{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-          }
-          .dial-wrapper1{
-            display: flex;
-            flex-direction: column;
-            height: 0px;
-            overflow: auto;
-          }
-          .dial-wrapper1::-webkit-scrollbar{
-            display: none;
-          }
-          #start-button{
-            width: 100%;
-            font-size: 25px;
-            height: 32px;
-            background: #00A676;
-            color: #F7F9F9;
-          }
+            .navbar{
+              display: flex;
+              min-height: 10vh;
+              padding-left: 10px;
+              align-items: center;
+              background: #373337;
+              color: #D8B39C;
+              border-bottom: 3px solid #D8B39C;
+              flex: 0 0 auto;
+            }
+              #title{
+                font-size: 55px;
+                cursor: auto;
+              }
+              .flex-container-column{
+                display: flex;
+                flex-direction: column;
+                padding: 0 10px 0 10px;
+                align-items: center;
+                jistify-content: center;
+                margin-left: 2%;
+                border: solid;
+              }
+              .heading{
+                font-weight: 300;
+              }
+            #display{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              width: 100%;
+              background-image: radial-gradient( #F7F9F9 , #E3E7D3, #849483);
+              flex: 1 0 auto;
+            }
+            #timer-wrapper{
+              display: flex;
+              flex-direction: column;
+              min-width: 28%;
+              bottom: 33%;
+              position: absolute;
+              bottom: 33%;
+            }
+        
+              #timer{
+                display: flex;
+                flex-direction: row;
+                text-align: center;
+                min-width: 33.33%;
+              }
+              .time-place-holders{
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+              }
+              .time-display{
+                height: 90%;
+                font-size: 160px;
+                font-weight: 400;
+                background-color: #373337;
+                color: #D8B39C;
+              }
+              .dial-wrapper1{
+                display: flex;
+                flex-direction: column;
+                height: 0px;
+                overflow: auto;
+                }
+              .dial-wrapper1::-webkit-scrollbar{
+                display: none;
+                }
+              .description{
+                background-color: #373337;
+                color: #D8B39C;
+              }
+            #start-button{
+              width: 100%;
+              font-size: 25px;
+              height: 32px;
+              background: #00A676;
+              color: #F7F9F9;
+            }
+
+      /*Generic Element Styling*/
+
           h1:hover{
             cursor: pointer;
           }
@@ -311,29 +338,18 @@ export default class home extends React.Component{
             user-select: none;          /* Likely future */   
           }
           footer{
-            position: absolute;
-            display: block;
-            bottom: 0;
-            left: 0;
-            padding: 5px 0 8px 5px;
-            width: 100%;
-            z-index: 1;
             background: #373337;
             color: #D8B39C;
-            font-size: 15px;
             border-top: 3px solid #D8B39C;
-            height: 5%;
+            font-size: 13px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 30px;
           }
-          .time-display{
-            height: 90%;
-            font-size: 160px;
-            font-weight: 400;
-            background-color: #373337;
-            color: #D8B39C;
-          }
-          .description{
-            background-color: #373337;
-            color: #D8B39C;
+          footer p {
+            padding: 5px 0 8px 10px ;
           }
           button{
             outline: none;
@@ -341,27 +357,27 @@ export default class home extends React.Component{
           button:focus{
             outline:none;
           }
-          @media screen and (max-width: 1000px){
-            #title{
-              font-size: 42px;
-            }
-            .heading{
-              font-size: 18px;
-            }
 
-            .time-display{
-              font-size: 120px;
-            }
-            .description{
-              font-size: 25px;
-            }
-            #start-button{
-              font-size: 23px;
-            }
-            footer{
-              font-size: 13px;
-            }
+    /*Responsive Web Design*/
+
+        @media screen and (max-width: 1000px){
+          #title{
+            font-size: 42px;
           }
+          .heading{
+            font-size: 18px;
+          }
+
+          .time-display{
+            font-size: 120px;
+          }
+          .description{
+            font-size: 25px;
+          }
+          #start-button{
+            font-size: 23px;
+          }
+        }
           @media screen and (max-width: 750px){
             #title{
               font-size: 30px;
@@ -456,12 +472,14 @@ export default class home extends React.Component{
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
           sans-serif;
+        display: flex;
+        flex-direction: column;
       }
       *{
         padding: 0;
         margin: 0;
         border: 0;
-        box-sizing: border-box;
+        
       }
     `}</style>
       </div>
