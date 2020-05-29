@@ -223,10 +223,11 @@ export default class home extends React.Component{
 
         {/***Footer***/}
 
+          
+        </div>
           <footer>
             <p>&copy; Bryan Wong | 2020</p>
           </footer>
-        </div>
 
         <style jsx>{`
 
@@ -343,10 +344,8 @@ export default class home extends React.Component{
             border-top: 3px solid #D8B39C;
             font-size: 13px;
             width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 30px;
+            position: flex;
+            flex: 0 0 35px;
           }
           footer p {
             padding: 5px 0 8px 10px ;
@@ -452,9 +451,6 @@ export default class home extends React.Component{
             #start-button{
               font-size: 20px;
             }
-            #timer-wrapper{
-              bottom: 25%;
-          }
           }
         `}</style>
 
@@ -464,12 +460,14 @@ export default class home extends React.Component{
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
           sans-serif;
+          
       }
       *{
         padding: 0;
         margin: 0;
         border: 0;
         box-sizing: border-box;
+        overflow-y: hidden;
       }
     `}</style>
       </div>
