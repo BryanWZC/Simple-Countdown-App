@@ -460,14 +460,13 @@ export default class home extends React.Component{
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
           sans-serif;
-          
+          display: relative;
       }
       *{
         padding: 0;
         margin: 0;
         border: 0;
         box-sizing: border-box;
-        overflow-y: hidden;
       }
     `}</style>
       </div>
